@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/transaction_list.dart';
+import 'widgets/user_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,60 +19,24 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Expense Tracker'),
+        title: const Text('Expense Tracker'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             width: double.infinity,
-            child: Card(
+            child: const Card(
               color: Colors.amber,
               child: Text('Chart'),
               elevation: 5,
             ),
           ),
-          Card(
-            elevation: 5,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Title',
-                    ),
-                    controller: titleController,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Amount',
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      print(titleController.text);
-                      print(amountController.text);
-                    },
-                    child: Text('Add Transaction'),
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 15),
-                      primary: Colors.purple,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          TransactionList(),
+          UserTransactions(),
         ],
       ),
     );
