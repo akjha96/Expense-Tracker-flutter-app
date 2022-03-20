@@ -19,9 +19,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  // String titleInput = '';
-  // String amountInput = '';
-
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
@@ -32,7 +29,6 @@ class MyHomePage extends StatelessWidget {
         title: Text('Expense Tracker'),
       ),
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -55,14 +51,11 @@ class MyHomePage extends StatelessWidget {
                       labelText: 'Title',
                     ),
                     controller: titleController,
-
-                    // onChanged: (value) => titleInput = value,
                   ),
                   TextField(
                     decoration: InputDecoration(
                       labelText: 'Amount',
                     ),
-                    // onChanged: (value) => amountInput = value,
                   ),
                   TextButton(
                     onPressed: () {
