@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/user_transaction.dart';
+import 'models/transaction.dart';
+import 'widgets/transaction_list.dart';
+import 'widgets/new_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,8 +18,72 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> _userTransactions = [
+    Transaction(
+      id: 't1',
+      title: 'Grapes',
+      amount: 92.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Milk',
+      amount: 61.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Bread',
+      amount: 44.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Butter',
+      amount: 5.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Oranges',
+      amount: 90.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't6',
+      title: 'Grapes',
+      amount: 46.00,
+      date: DateTime.now(),
+    ),
+  ];
+
+  void _addNewtransaction(String title, double amount) {
+    final newTransaction = Transaction(
+      id: DateTime.now().toString(),
+      title: title,
+      amount: amount,
+      date: DateTime.now(),
+    );
+    setState(() {
+      _userTransactions.add(newTransaction);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return NewTransaction(addNewtransaction: _addNewtransaction);
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +99,7 @@ class MyHomePage extends StatelessWidget {
               semanticLabel: 'Text to announce in accessibility modes',
             ),
             tooltip: 'Open shopping cart',
-            onPressed: () {
-              // handle the press
-            },
+            onPressed: () => _startAddNewTransaction(context),
           ),
         ],
       ),
@@ -51,14 +115,14 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            UserTransactions(),
+            TransactionList(userTransactions: _userTransactions),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _startAddNewTransaction(context),
       ),
     );
   }
