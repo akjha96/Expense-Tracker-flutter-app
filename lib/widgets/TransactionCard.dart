@@ -21,7 +21,6 @@ class TransactionCard extends StatelessWidget {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              // color: Colors.amber,
               border: Border.all(
                 color: Color.fromARGB(255, 72, 33, 139),
                 width: 2,
