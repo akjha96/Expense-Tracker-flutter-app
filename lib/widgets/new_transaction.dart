@@ -6,7 +6,7 @@ class NewTransaction extends StatelessWidget {
   final Function addNewtransaction;
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-
+  final FocusNode _focusNode = FocusNode();
   void submitData() {
     final String enteredTitle = titleController.text;
     final double enteredAmount = amountController.text.isNotEmpty
@@ -18,6 +18,7 @@ class NewTransaction extends StatelessWidget {
     }
 
     addNewtransaction(enteredTitle, enteredAmount);
+    _focusNode.unfocus();
   }
 
   @override
@@ -39,6 +40,7 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
               onSubmitted: (_) => submitData(),
+              focusNode: _focusNode,
             ),
             TextButton(
               onPressed: submitData,
