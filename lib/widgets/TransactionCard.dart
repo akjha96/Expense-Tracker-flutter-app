@@ -22,7 +22,7 @@ class TransactionCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: Color.fromARGB(255, 72, 33, 139),
+                color: Theme.of(context).primaryColor,
                 width: 2,
                 style: BorderStyle.solid,
               ),
@@ -30,9 +30,10 @@ class TransactionCard extends StatelessWidget {
             child: Text(
               '₹ ${transaction.amount.toStringAsFixed(2)}',
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Color.fromARGB(255, 72, 33, 139)),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
           Container(

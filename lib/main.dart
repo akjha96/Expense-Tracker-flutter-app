@@ -12,7 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Expense Tracker',
+      title: 'Personal Expense Tracker',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.orange,
+        ).copyWith(
+          secondary: Colors.amber,
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -89,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expense Tracker'),
+        title: const Text('Personal Expense Tracker'),
         actions: [
           IconButton(
             icon: const Icon(
@@ -110,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: const Card(
-                color: Colors.amber,
+                color: Colors.blue,
                 child: Text('Chart'),
                 elevation: 5,
               ),
