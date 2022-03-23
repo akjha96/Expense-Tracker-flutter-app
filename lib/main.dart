@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ).copyWith(
           secondary: Colors.amber,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline6: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 16,
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         fontFamily: 'Quicksand',
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 21,
