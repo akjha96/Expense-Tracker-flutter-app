@@ -42,10 +42,7 @@ class TransactionCard extends StatelessWidget {
               children: [
                 Text(
                   transaction.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.headline6,
                 ),
                 Text(
                   DateFormat('d/M/y').add_jms().format(transaction.date),
