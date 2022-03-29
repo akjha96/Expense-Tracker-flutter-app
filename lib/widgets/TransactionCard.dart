@@ -11,49 +11,30 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 2,
-                style: BorderStyle.solid,
-              ),
-            ),
-            child: Text(
-              '₹ ${transaction.amount.toStringAsFixed(2)}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      elevation: 5,
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Colors.white,
+          radius: 30,
+          child: Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: FittedBox(
+              child: Text('₹ ${transaction.amount.toStringAsFixed(2)}'),
             ),
           ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  transaction.title,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                Text(
-                  DateFormat('d/M/y').add_jms().format(transaction.date),
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
+        ),
+        title: Text(
+          transaction.title,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        subtitle: Text(
+          DateFormat('d/M/y').add_jms().format(transaction.date),
+          style: TextStyle(
+            color: Colors.grey,
           ),
-        ],
+        ),
       ),
     );
   }
