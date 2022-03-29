@@ -21,7 +21,7 @@ class TransactionCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(6.0),
             child: FittedBox(
-              child: Text('₹ ${transaction.amount.toStringAsFixed(2)}'),
+              child: Text('₹ ${transaction.amount}'),
             ),
           ),
         ),
