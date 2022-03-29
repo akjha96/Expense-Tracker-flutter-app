@@ -52,30 +52,37 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => submitData(),
               focusNode: _focusNode,
             ),
-            Row(
-              children: [
-                Text('No Date Chosen!'),
-                TextButton(
-                  onPressed: submitData,
-                  child: Text(
-                    'Choose Date',
+            Container(
+              height: 80,
+              child: Row(
+                children: [
+                  Text('No Date Chosen!'),
+                  TextButton(
+                    onPressed: submitData,
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    style: TextButton.styleFrom(
+                      textStyle: TextStyle(
+                          fontSize: 15,
+                          color: Theme.of(context).colorScheme.primary),
+                    ),
                   ),
-                  style: TextButton.styleFrom(
-                    textStyle: TextStyle(
-                        fontSize: 15,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: submitData,
               child: Text(
                 'Add Transaction',
               ),
-              style: TextButton.styleFrom(
-                textStyle: TextStyle(
-                    fontSize: 15, color: Theme.of(context).colorScheme.primary),
+              style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).colorScheme.primary,
+                onPrimary: Theme.of(context).textTheme.button!.color,
+                textStyle: TextStyle(fontSize: 15),
               ),
             ),
           ],
