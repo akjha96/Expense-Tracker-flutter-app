@@ -30,7 +30,7 @@ class TransactionCard extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         subtitle: Text(
-          DateFormat('d/M/y').add_jms().format(transaction.date),
+          DateFormat('d/M/y').format(transaction.date),
           style: TextStyle(
             color: Colors.grey,
           ),

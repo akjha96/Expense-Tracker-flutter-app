@@ -16,7 +16,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
   final FocusNode _focusNode = FocusNode();
 
-  void submitData() {
+  void _submitData() {
     final String enteredTitle = titleController.text;
     final double enteredAmount = amountController.text.isNotEmpty
         ? double.parse(amountController.text)
@@ -31,6 +31,14 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.of(context).pop();
   }
 
+  void _presentDatePicker() {
+    showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2021),
+        lastDate: DateTime.now());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -43,13 +51,13 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => _submitData(),
             ),
             TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => _submitData(),
               focusNode: _focusNode,
             ),
             Container(
@@ -58,7 +66,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 children: [
                   Text('No Date Chosen!'),
                   TextButton(
-                    onPressed: submitData,
+                    onPressed: _presentDatePicker,
                     child: Text(
                       'Choose Date',
                       style: TextStyle(
@@ -75,7 +83,7 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
             ),
             ElevatedButton(
-              onPressed: submitData,
+              onPressed: _submitData,
               child: Text(
                 'Add Transaction',
               ),
