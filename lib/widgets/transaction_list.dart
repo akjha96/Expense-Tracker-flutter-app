@@ -38,6 +38,7 @@ class TransactionList extends StatelessWidget {
               ],
             )
           : ListView.builder(
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (ctx, index) {
                 return TransactionCard(
                     transaction: userTransactions[index],
