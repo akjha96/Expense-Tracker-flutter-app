@@ -19,16 +19,23 @@ class _NewTransactionState extends State<NewTransaction> {
   final FocusNode _focusNode = FocusNode();
 
   void _submitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
     final String _enteredTitle = _titleController.text;
     final double _enteredAmount = _amountController.text.isNotEmpty
         ? double.parse(_amountController.text)
         : 0;
 
-    if (_enteredTitle.isEmpty || _enteredAmount <= 0) {
+    if (_enteredTitle.isEmpty || _enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
-    widget.addNewtransaction(_enteredTitle, _enteredAmount);
+    widget.addNewtransaction(
+      _enteredTitle,
+      _enteredAmount,
+      _selectedDate,
+    );
     _focusNode.unfocus();
     Navigator.of(context).pop();
   }
