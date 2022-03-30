@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.orange,
+          errorColor: Colors.red,
         ).copyWith(
           secondary: Colors.amber,
         ),
@@ -81,6 +82,13 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions
+          .removeWhere((userTransaction) => userTransaction.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(recentTransactions: _recentTransactions),
-            TransactionList(userTransactions: _userTransactions),
+            TransactionList(
+                userTransactions: _userTransactions,
+                deleteTransaction: _deleteTransaction),
           ],
         ),
       ),

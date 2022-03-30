@@ -1,12 +1,18 @@
-import '../models/transaction.dart';
 import 'package:flutter/material.dart';
 
+import '../models/transaction.dart';
 import 'transactionCard.dart';
 
 class TransactionList extends StatelessWidget {
   List<Transaction> userTransactions;
 
-  TransactionList({required this.userTransactions, Key? key}) : super(key: key);
+  final Function deleteTransaction;
+
+  TransactionList({
+    Key? key,
+    required this.userTransactions,
+    required this.deleteTransaction,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,9 @@ class TransactionList extends StatelessWidget {
             )
           : ListView.builder(
               itemBuilder: (ctx, index) {
-                return TransactionCard(transaction: userTransactions[index]);
+                return TransactionCard(
+                    transaction: userTransactions[index],
+                    deleteTransaction: deleteTransaction);
               },
               itemCount: userTransactions.length,
             ),
