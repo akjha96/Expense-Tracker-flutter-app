@@ -16,36 +16,33 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 330,
-      child: userTransactions.isEmpty
-          ? Column(
-              children: [
-                Text(
-                  'No transctions added yet!',
-                  style: Theme.of(context).textTheme.headline6,
+    return userTransactions.isEmpty
+        ? Column(
+            children: [
+              Text(
+                'No transctions added yet!',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 200,
+                child: Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            )
-          : ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (ctx, index) {
-                return TransactionCard(
-                    transaction: userTransactions[index],
-                    deleteTransaction: deleteTransaction);
-              },
-              itemCount: userTransactions.length,
-            ),
-    );
+              )
+            ],
+          )
+        : ListView.builder(
+            // physics: const BouncingScrollPhysics(),
+            itemBuilder: (ctx, index) {
+              return TransactionCard(
+                  transaction: userTransactions[index],
+                  deleteTransaction: deleteTransaction);
+            },
+            itemCount: userTransactions.length,
+          );
   }
 }

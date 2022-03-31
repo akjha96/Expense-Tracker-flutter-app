@@ -91,30 +91,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personal Expense Tracker'),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 28.0,
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-            tooltip: 'Open shopping cart',
-            onPressed: () => _startAddNewTransaction(context),
+    final appBar = AppBar(
+      title: const Text('Personal Expense Tracker'),
+      actions: [
+        IconButton(
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 28.0,
+            semanticLabel: 'Text to announce in accessibility modes',
           ),
-        ],
-      ),
+          tooltip: 'Open shopping cart',
+          onPressed: () => _startAddNewTransaction(context),
+        ),
+      ],
+    );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(recentTransactions: _recentTransactions),
-            TransactionList(
-                userTransactions: _userTransactions,
-                deleteTransaction: _deleteTransaction),
+            Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.3,
+                child: Chart(recentTransactions: _recentTransactions)),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.7,
+              child: TransactionList(
+                  userTransactions: _userTransactions,
+                  deleteTransaction: _deleteTransaction),
+            ),
           ],
         ),
       ),
