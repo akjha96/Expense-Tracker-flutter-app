@@ -22,7 +22,7 @@ class TransactionList extends StatelessWidget {
             builder: (ctx, constraints) => Column(
               children: [
                 Text(
-                  'No transctions added yet!',
+                  'No transactions added yet!',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 const SizedBox(
