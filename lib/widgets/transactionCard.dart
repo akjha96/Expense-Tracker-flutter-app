@@ -4,11 +4,11 @@ import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
 class TransactionCard extends StatelessWidget {
-  Transaction transaction;
+  final Transaction transaction;
 
   final Function deleteTransaction;
 
-  TransactionCard(
+  const TransactionCard(
       {required this.transaction, required this.deleteTransaction, Key? key})
       : super(key: key);
 
@@ -16,7 +16,7 @@ class TransactionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       elevation: 5,
       child: ListTile(
         leading: CircleAvatar(
@@ -36,15 +36,15 @@ class TransactionCard extends StatelessWidget {
         ),
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(transaction.date),
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
           ),
         ),
         trailing: mediaQuery.size.width > 360
             ? TextButton.icon(
                 onPressed: () => deleteTransaction(transaction.id),
-                icon: Icon(Icons.delete),
-                label: Text('Delete'),
+                icon: const Icon(Icons.delete),
+                label: const Text('Delete'),
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all<Color>(
                       Theme.of(context).colorScheme.error),
@@ -52,7 +52,7 @@ class TransactionCard extends StatelessWidget {
               )
             : IconButton(
                 onPressed: () => deleteTransaction(transaction.id),
-                icon: Icon(Icons.delete),
+                icon: const Icon(Icons.delete),
                 color: Theme.of(context).colorScheme.error,
               ),
       ),

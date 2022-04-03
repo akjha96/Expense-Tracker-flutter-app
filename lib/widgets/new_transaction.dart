@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 import 'adaptive_text_button.dart';
 
 class NewTransaction extends StatefulWidget {
-  NewTransaction({required this.addNewtransaction, Key? key}) : super(key: key);
+  const NewTransaction({required this.addNewtransaction, Key? key})
+      : super(key: key);
 
   final Function addNewtransaction;
 
@@ -78,13 +79,13 @@ class _NewTransactionState extends State<NewTransaction> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
               ),
               TextField(
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
                 controller: _amountController,
                 onSubmitted: (_) => _submitData(),
                 focusNode: _focusNode,
@@ -107,13 +108,13 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               ElevatedButton(
                 onPressed: _submitData,
-                child: Text(
+                child: const Text(
                   'Add Transaction',
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: Theme.of(context).colorScheme.primary,
                   onPrimary: Theme.of(context).textTheme.button!.color,
-                  textStyle: TextStyle(fontSize: 15),
+                  textStyle: const TextStyle(fontSize: 15),
                 ),
               ),
             ],
