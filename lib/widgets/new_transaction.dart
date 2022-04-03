@@ -1,22 +1,52 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 import 'adaptive_text_button.dart';
 
 class NewTransaction extends StatefulWidget {
-  const NewTransaction({required this.addNewtransaction, Key? key})
-      : super(key: key);
+  NewTransaction({required this.addNewtransaction, Key? key})
+      : super(key: key) {
+    // print("Constructor NewTransaction Widget");
+  }
 
   final Function addNewtransaction;
 
   @override
-  State<NewTransaction> createState() => _NewTransactionState();
+  State<NewTransaction> createState() {
+    // print("createState NewTransaction Widget");
+
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
+  _NewTransactionState() {
+    // print('Constructor _newTransaction State');
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // print('initState()');
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant NewTransaction oldWidget) {
+    // TODO: implement didUpdateWidget
+    // print('didUpdateWidget()');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    // print('Dispose()');
+    super.dispose();
+  }
+
   final _titleController = TextEditingController();
 
   final _amountController = TextEditingController();
