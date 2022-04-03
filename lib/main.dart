@@ -100,40 +100,96 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Widget> _buildLandscapeContent(
+    MediaQueryData mediaQuery,
+    PreferredSizeWidget appBar,
+    Widget transactionListWidget,
+  ) =>
+      [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Show Chart',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Switch.adaptive(
+              activeColor: Theme.of(context).colorScheme.secondary,
+              value: _showChart,
+              onChanged: (val) {
+                setState(() {
+                  _showChart = val;
+                });
+              },
+            ),
+          ],
+        ),
+        _showChart
+            ? Container(
+                height: (mediaQuery.size.height -
+                        appBar.preferredSize.height -
+                        mediaQuery.padding.top) *
+                    0.7,
+                child: Chart(recentTransactions: _recentTransactions),
+              )
+            : transactionListWidget
+      ];
+
+  List<Widget> _buildPotraitContent(
+    MediaQueryData mediaQuery,
+    PreferredSizeWidget appBar,
+    Widget transactionListWidget,
+  ) =>
+      [
+        Container(
+          height: (mediaQuery.size.height -
+                  appBar.preferredSize.height -
+                  mediaQuery.padding.top) *
+              0.3,
+          child: Chart(recentTransactions: _recentTransactions),
+        ),
+        transactionListWidget
+      ];
+
+  CupertinoNavigationBar _buildIosAppbar() => CupertinoNavigationBar(
+        middle: const Text('Personal Expense Tracker'),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              child: const Icon(CupertinoIcons.add),
+              onTap: () => _startAddNewTransaction(context),
+            )
+          ],
+        ),
+      );
+
+  PreferredSizeWidget _buildAndroidAppBar() => AppBar(
+        title: const Text('Personal Expense Tracker'),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 28.0,
+              semanticLabel: 'Text to announce in accessibility modes',
+            ),
+            tooltip: 'Open shopping cart',
+            onPressed: () => _startAddNewTransaction(context),
+          ),
+        ],
+      );
+
+  PreferredSizeWidget _buildAppBar() =>
+      Platform.isIOS ? _buildIosAppbar() : _buildAndroidAppBar();
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
 
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    final PreferredSizeWidget appBar = Platform.isIOS
-        ? CupertinoNavigationBar(
-            middle: const Text('Personal Expense Tracker'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  child: const Icon(CupertinoIcons.add),
-                  onTap: () => _startAddNewTransaction(context),
-                )
-              ],
-            ),
-          )
-        : AppBar(
-            title: const Text('Personal Expense Tracker'),
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 28.0,
-                  semanticLabel: 'Text to announce in accessibility modes',
-                ),
-                tooltip: 'Open shopping cart',
-                onPressed: () => _startAddNewTransaction(context),
-              ),
-            ],
-          ) as PreferredSizeWidget;
+    final PreferredSizeWidget appBar = _buildAppBar();
 
     final transactionListWidget = Container(
       height: (mediaQuery.size.height -
@@ -151,47 +207,16 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Show Chart',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  Switch.adaptive(
-                    activeColor: Theme.of(context).colorScheme.secondary,
-                    value: _showChart,
-                    onChanged: (val) {
-                      setState(() {
-                        _showChart = val;
-                      });
-                    },
-                  ),
-                ],
-              ),
+              ..._buildLandscapeContent(
+                  mediaQuery, appBar, transactionListWidget),
             if (!isLandscape)
-              Container(
-                height: (mediaQuery.size.height -
-                        appBar.preferredSize.height -
-                        mediaQuery.padding.top) *
-                    0.3,
-                child: Chart(recentTransactions: _recentTransactions),
-              ),
-            if (!isLandscape) transactionListWidget,
-            if (isLandscape)
-              _showChart
-                  ? Container(
-                      height: (mediaQuery.size.height -
-                              appBar.preferredSize.height -
-                              mediaQuery.padding.top) *
-                          0.7,
-                      child: Chart(recentTransactions: _recentTransactions),
-                    )
-                  : transactionListWidget
+              ..._buildPotraitContent(
+                  mediaQuery, appBar, transactionListWidget),
           ],
         ),
       ),
     );
+
     return Platform.isIOS
         ? CupertinoPageScaffold(
             child: pageBody,
