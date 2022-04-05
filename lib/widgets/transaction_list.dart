@@ -38,14 +38,14 @@ class TransactionList extends StatelessWidget {
               ],
             ),
           )
-        : ListView.builder(
+        : ListView(
+            children: userTransactions
+                .map((userTransaction) => TransactionCard(
+                    key: ValueKey(userTransaction.id),
+                    transaction: userTransaction,
+                    deleteTransaction: deleteTransaction))
+                .toList(),
             // physics: const BouncingScrollPhysics(),
-            itemBuilder: (ctx, index) {
-              return TransactionCard(
-                  transaction: userTransactions[index],
-                  deleteTransaction: deleteTransaction);
-            },
-            itemCount: userTransactions.length,
           );
   }
 }
